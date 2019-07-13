@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Globomantics.Filters;
 using Microsoft.AspNetCore.Mvc;
-using Globomantics.Models;
 using Globomantics.Services;
 
 namespace Globomantics.Controllers
 {
     [Route("api/[controller]")]
+    [RateExceptionFilter]
     public class RatesController : Controller
     {
         private IRateService rateService;
@@ -27,7 +23,14 @@ namespace Globomantics.Controllers
         }
 
         [HttpGet]
-        [Route("credit")]
+        [Route("autoloan")]
+        public IActionResult GetAutoLoanRates()
+        {
+            return Ok(rateService.GetAutoLoanRates());
+        }
+
+        [HttpGet]
+        [Route("creditcard")]
         public IActionResult GetCreditCardRates()
         {
             return Ok(rateService.GetCreditCardRates());

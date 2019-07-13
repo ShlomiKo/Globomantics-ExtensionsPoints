@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Globomantics.Models;
 using Globomantics.Services;
 using Microsoft.Extensions.Logging;
@@ -34,16 +29,8 @@ namespace Globomantics.Controllers
         [HttpPost]
         public IActionResult Quote(AutoQuote quote)
         {
-            if (ModelState.IsValid)
-            {
-                quoteService.GenerateAutoQuote(quote);
-                return RedirectToAction("Index", "Insurance");
-            }
-            else
-            {
-                logger.LogInformation("Bad model", quote);
-                return View(quote);
-            }
+            quoteService.GenerateAutoQuote(quote);
+            return RedirectToAction("Confirmation", "Insurance");
         }
 
         [HttpGet]
